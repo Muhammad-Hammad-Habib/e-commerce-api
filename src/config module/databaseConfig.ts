@@ -9,4 +9,5 @@ export const typeOrmModule = TypeOrmModule.forRoot({
     database: 'e-com',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,
-})
+    autoLoadEntities : true
+})  
