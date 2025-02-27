@@ -18,8 +18,8 @@ export class UserController {
   @UseGuards(AuthGuard('local'))
   loginUser(@Request() req) {
     console.log(req.user)
-    return req.user
-  }  
+    return this.userService.dataToJwt(req.user)
+  }
 
 
   // //-------------

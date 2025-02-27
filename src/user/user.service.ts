@@ -5,11 +5,14 @@ import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt'
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { AuthService } from 'src/auth_authriz/auth.service';
 
 @Injectable()
 export class UserService {
   constructor(@InjectRepository(User) private userRepo: Repository<User>,
-    private readonly configEnv: ConfigService) {
+    private readonly configEnv: ConfigService,
+    private readonly authService: AuthService) {
   }
 
   async createUser(data: CreateUserDto): Promise<User | any> {
@@ -25,6 +28,12 @@ export class UserService {
       return error.code
     }
   }
+
+  dataToJwt(payload) {
+    return this.authService.dataToJwt(payload)
+  }
+
+
 
 
 
