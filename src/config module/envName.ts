@@ -1,0 +1,1 @@
+export const pathEnvFile = ".local.env"

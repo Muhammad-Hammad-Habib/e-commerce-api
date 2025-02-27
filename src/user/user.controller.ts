@@ -1,21 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, ValidationPipe } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserPipe } from './dtoPipe/create-user.pipe';
+import { UpdateUserDto } from './dtoPipe/update-user.dto';
+import { AuthGuard } from '@nestjs/passport';
+import * as request from 'express';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Post("/register")
-  createUser(@Body() createUser: CreateUserDto) {
-    // console.log("createUser")
-    return this.userService.createUser(createUser);
+  createUser(@Body(new ValidationPipe()) data: CreateUserPipe) {
+    return this.userService.createUser(data);
   }
 
- 
- 
-
+  @Get("login")
+  @UseGuards(AuthGuard('local'))
+  loginUser(@Request() req) {
+    console.log(req.user)
+    return req.user
+  }  
 
 
   // //-------------

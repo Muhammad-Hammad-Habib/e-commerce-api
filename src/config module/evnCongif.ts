@@ -1,8 +1,8 @@
 import { ConfigModule } from "@nestjs/config";
+import { pathEnvFile } from "./envName";
+
 
 export const envConfigMudule = ConfigModule.forRoot({
-    isGlobal : true,
-    envFilePath : ".local.env",
-    
-    // envFilePath : ".prod.env"
+    isGlobal: true,
+    envFilePath: pathEnvFile,
 }) 
