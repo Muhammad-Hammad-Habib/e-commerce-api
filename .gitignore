@@ -4,6 +4,7 @@
 /build
 .prod.env
 
+image.png
 # Logs
 logs
 *.log
